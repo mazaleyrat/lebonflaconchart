@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.nodejs.yml
+    kompose.version: 1.16.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: lebonflacon-api
+  name: lebonflacon-api
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: lebonflacon-api
+    spec:
+      containers:
+      - env:
+        - name: BIND_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: BIND_HOST
+              name: app-docker-vue-storefront-api-default-env
+        - name: ELASTICSEARCH_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: ELASTICSEARCH_HOST
+              name: app-docker-vue-storefront-api-default-env
+        - name: ELASTICSEARCH_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: ELASTICSEARCH_PORT
+              name: app-docker-vue-storefront-api-default-env
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_HOST
+              name: app-docker-vue-storefront-api-default-env
+        - name: VS_ENV
+          valueFrom:
+            configMapKeyRef:
+              key: VS_ENV
+              name: app-docker-vue-storefront-api-default-env
+        image: gcr.io/root-sanctuary-212300/github-mazaleyrat-vue-storefront-api:latest
+        name: lebonflacon-api
+        ports:
+        - containerPort: 8080
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/www/dist
+          name: app-tmpfs0
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regsecret
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: app-tmpfs0
+status: {}
