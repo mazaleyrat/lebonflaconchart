@@ -1,12 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.nodejs.yml
-    kompose.version: 1.16.0 ()
-  creationTimestamp: null
-  labels:
-    io.kompose.service: lebonflacon-api
   name: lebonflacon-api
 spec:
   replicas: 1
@@ -24,27 +18,42 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: BIND_HOST
-              name: app-docker-vue-storefront-api-default-env
+              name: api-docker-vue-storefront-api-default-env
         - name: ELASTICSEARCH_HOST
           valueFrom:
             configMapKeyRef:
               key: ELASTICSEARCH_HOST
-              name: app-docker-vue-storefront-api-default-env
+              name: api-docker-vue-storefront-api-default-env
         - name: ELASTICSEARCH_PORT
           valueFrom:
             configMapKeyRef:
               key: ELASTICSEARCH_PORT
-              name: app-docker-vue-storefront-api-default-env
+              name: api-docker-vue-storefront-api-default-env
         - name: REDIS_HOST
           valueFrom:
             configMapKeyRef:
               key: REDIS_HOST
-              name: app-docker-vue-storefront-api-default-env
+              name: api-docker-vue-storefront-api-default-env
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_PORT
+              name: api-docker-vue-storefront-api-default-env
+        - name: REDIS_DB
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_DB
+              name: api-docker-vue-storefront-api-default-env
+        - name: BIND_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: BIND_PORT
+              name: api-docker-vue-storefront-api-default-env
         - name: VS_ENV
           valueFrom:
             configMapKeyRef:
               key: VS_ENV
-              name: app-docker-vue-storefront-api-default-env
+              name: api-docker-vue-storefront-api-default-env
         image: gcr.io/root-sanctuary-212300/github-mazaleyrat-vue-storefront-api:latest
         name: lebonflacon-api
         ports:

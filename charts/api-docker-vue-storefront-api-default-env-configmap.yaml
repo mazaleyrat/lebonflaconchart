@@ -1,13 +1,16 @@
 apiVersion: v1
 data:
   BIND_HOST: 0.0.0.0
-  ELASTICSEARCH_HOST: elasticsearch
+  BIND_PORT: "8080"
+  ELASTICSEARCH_HOST: es1.default.svc.cluster.local
   ELASTICSEARCH_PORT: "9200"
-  REDIS_HOST: redis
+  REDIS_HOST: "redis.default.svc.cluster.local"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
   VS_ENV: dev
 kind: ConfigMap
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: app-docker-vue-storefront-api-default-env
-  name: app-docker-vue-storefront-api-default-env
+    io.kompose.service: api-docker-vue-storefront-api-default-env
+  name: api-docker-vue-storefront-api-default-env

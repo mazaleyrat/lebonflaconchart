@@ -40,10 +40,10 @@ spec:
             configMapKeyRef:
               key: VS_ENV
               name: app-docker-vue-storefront-default-env
-        image: gcr.io/root-sanctuary-212300/github-mazaleyrat-vue-storefront:latest 
+        image: gcr.io/root-sanctuary-212300/github-mazaleyrat-vue-storefront:latest
         name: vuestorefront
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         resources: {}
         volumeMounts:
         - mountPath: /var/www/dist
