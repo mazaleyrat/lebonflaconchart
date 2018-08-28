@@ -1,21 +1,24 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  labels:
+    app: redis
   name: redis
 spec:
+  selector:
+    matchLabels:
+      app: redis
   replicas: 1
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        io.kompose.service: redis
+        app: redis
     spec:
       containers:
       - image: redis:4-alpine
         name: redis
         ports:
         - containerPort: 6379
-        resources: {}
       restartPolicy: Always
-status: {}

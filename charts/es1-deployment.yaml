@@ -1,22 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yml
-    kompose.version: 1.16.0 ()
-  creationTimestamp: null
   labels:
-    io.kompose.service: es1
+    app: es1
   name: es1
 spec:
+  selector:
+    matchLabels:
+      app: es1
   replicas: 1
   strategy:
     type: Recreate
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        io.kompose.service: es1
+        app: es1
     spec:
       containers:
       - env:
@@ -49,4 +47,3 @@ spec:
       - name: esdat1
         persistentVolumeClaim:
           claimName: esdat1
-status: {}

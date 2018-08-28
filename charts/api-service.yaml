@@ -2,11 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: lebonflacon-api
+  labels:
+    app: lebonflacon-api
 spec:
   ports:
   - name: "8080"
     port: 8080
-    targetPort: 8080
+    #targetPort: 8080
   type: NodePort
-status:
-  loadBalancer: {}
+  selector:
+    app: lebonflacon-api
